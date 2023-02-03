@@ -1,0 +1,128 @@
+{
+    "name": "Root",
+    "maps": [
+        {
+            "name": "Root",
+            "id": "31ad95c6-c741-4ab3-a7fe-41c5cef5a240",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "e68f247f-a167-42ae-a1b4-eb41d61c7271",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NavUp",
+                    "type": "Button",
+                    "id": "aa4e5fb9-ab07-4e2a-804e-8fa50a7e5515",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NavDown",
+                    "type": "Button",
+                    "id": "6d403c0f-abaf-40d8-810e-299a7747f355",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NavLeft",
+                    "type": "Button",
+                    "id": "fcfdcc4f-3f22-4dd8-9893-d05a5221d1d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "NavRight",
+                    "type": "Button",
+                    "id": "6153d998-fca2-4162-bf28-16e21b985e29",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Charge",
+                    "type": "Value",
+                    "id": "7f861867-5368-4d26-a9bc-276f2cc244a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d14e0402-19df-4f92-a7fc-61b7aa632311",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2de1f53-bf2f-4b34-8afb-dd0fbd7215d8",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7eb697a-47b2-4bdd-8e7b-dfa72dad83f0",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07bc3a83-0c4c-40c0-b34e-adfd6acdcff5",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4191962-d58c-43d2-989f-ea45b16ea520",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NavRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eca25a1a-ea91-45ec-86cf-7dafa94b70b1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Charge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
