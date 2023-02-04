@@ -14,14 +14,16 @@ namespace Assets.RootnShoot.Scripts.Root
         private TreeNode currentNode;
 
         [SerializeField] private GameObject circlePrefab;
+        [SerializeField] private GameObject LinePrefab;
         //Shot
         public float shotSpeed;
-        [Range(0.01f, 0.2f)] public float fallOff = 0.05f;
+        [Range(0.001f, 0.2f)] public float fallOff = 0.05f;
         private Vector2 currentShotPos;
         private Vector2 shotDirection;
         private bool isShooting;
+        private bool collided;
         //line
-        public GameObject LinePrefab;
+        
         private LineRenderer currentLine;
         [SerializeField] private float rootThickness = 1;
         [SerializeField] private float squiggleProbability;
@@ -93,6 +95,11 @@ namespace Assets.RootnShoot.Scripts.Root
                 circle.transform.position = currentNode.position;
                 currentNode.circle = circle;
             }
+        }
+
+        public void CollidedWith(Collision2D collision)
+        {
+            collided = true;
         }
 
         public void Navigate(Direction direction)
