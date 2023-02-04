@@ -16,8 +16,7 @@ namespace Assets.RootnShoot.Scripts.Root
             Layer2,
             Layer3
         }
-
-        public int currentAllowedStage = 0;
+        public UpgradeManager upgradeManager;
 
         public Terrain currentTerrain;
         void Start()
@@ -31,16 +30,43 @@ namespace Assets.RootnShoot.Scripts.Root
             {
                 if (Enum.TryParse<Terrain>(collision.gameObject.name, out currentTerrain))
                 {
-                    if (currentAllowedStage < (int)currentTerrain)
+                    if (upgradeManager.hardlockLevel < (int)currentTerrain)
                     {
                         //New Zone not unlocked
-                        rootController.CollidedWith(collision);
+                        rootController.KillCurrentShot();
+                    }
+                }
+                else
+                {
+                    if(collision.gameObject.name.StartsWith("Border"))
+                    {
+                        rootController.KillCurrentShot();
                     }
                 }
             }
-            else
+            if(collision.gameObject.TryGetComponent<JuiceSource>(out JuiceSource juiceSource))
             {
-                rootController.CollidedWith(collision);
+                if (upgradeManager.softlockLevel < juiceSource.ConsumptionLevelNeeded)
+                {
+                    rootController.KillCurrentShot();
+                }
+                else
+                {
+                    rootController.AddJuice(juiceSource.Collect());
+                }
+            }
+            if(collision.gameObject.TryGetComponent<UpgradeSource>(out UpgradeSource upgradeSource))
+            {
+                rootController.AddUpgradePoints(upgradeSource.Collect());
+            }
+            if(collision.gameObject.TryGetComponent<Obstacle>(out Obstacle obstacle))
+            {
+                //collided with obstacle
+                rootController.KillCurrentShot();
+            }
+            if(collision.gameObject.TryGetComponent<EventZone>(out EventZone eventZone))
+            {
+                eventZone.OnEnter.Invoke();
             }
         }
 
@@ -72,7 +98,7 @@ namespace Assets.RootnShoot.Scripts.Root
         public bool CanMove(Vector3 position)
         {
             bool canMove = true;
-            if (currentAllowedStage < (int)currentTerrain)
+            if (upgradeManager.hardlockLevel < (int)currentTerrain)
                 canMove = false;
 
 

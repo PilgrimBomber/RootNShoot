@@ -7,9 +7,26 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     [SerializeField] RootController rootController;
-
+    private LineRenderer chargeLine;
     private Vector3 ChargeStartPos;
     private bool IsCharging = false;
+
+    private void Awake()
+    {
+        chargeLine = GetComponentInChildren<LineRenderer>();
+        chargeLine.gameObject.SetActive(false);
+        chargeLine.positionCount = 2;
+    }
+
+    private void Update()
+    {
+        if(IsCharging)
+        {
+            Vector3 currentMousePos = (Vector2)Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            chargeLine.SetPosition(1, currentMousePos );
+            rootController.juiceBar.material.SetFloat("JuiceForShot", rootController.CalculateJuiceCost(currentMousePos-ChargeStartPos));
+        }
+    }
 
     public void OnShoot(InputValue value)
     {
@@ -22,12 +39,19 @@ public class InputHandler : MonoBehaviour
         if(value.isPressed)
         {
             ChargeStartPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            IsCharging = true;
+            chargeLine.gameObject.SetActive(true);
+            chargeLine.SetPosition(0, (Vector2)ChargeStartPos);
+
         }
         else
         {
+            IsCharging = false;
+            rootController.juiceBar.material.SetFloat("JuiceForShot",0);
             Vector3 ReleasePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Debug.Log("Shoot\nDirection: " + (ChargeStartPos - ReleasePos) + "\nStart: " + ChargeStartPos + "\nRelease: " + ReleasePos);
+            //Debug.Log("Shoot\nDirection: " + (ChargeStartPos - ReleasePos) + "\nStart: " + ChargeStartPos + "\nRelease: " + ReleasePos);
             rootController.ShootToTarget(ChargeStartPos - ReleasePos);
+            chargeLine.gameObject.SetActive(false);
         }
     }
 

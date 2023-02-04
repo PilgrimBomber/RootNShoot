@@ -30,10 +30,21 @@ namespace Assets.RootnShoot.Scripts.Root
         [SerializeField] private float squiggleAngle = 30;
         //camera
         [SerializeField] private Transform followTarget;
+        [SerializeField] private Color deadColor;
+        //Juice
+        private float maxJuice=100;
+        private float currentJuice = 50;
+        [SerializeField] private float MinJuiceCost = 20;
+        [SerializeField] private float MaxShotStrength;
+        public SpriteRenderer juiceBar;
+
+        public float UpgradePoints;
+        private UpgradeManager upgradeManager;
         void Start()
         {
             rootNode = new TreeNode(Vector3.zero, null);
             currentNode = rootNode;
+            upgradeManager = GetComponent<UpgradeManager>();
         }
 
         private void Update()
@@ -43,6 +54,16 @@ namespace Assets.RootnShoot.Scripts.Root
             
         }
 
+        public void AddJuice(float amount)
+        {
+            currentJuice += amount;
+        }
+
+        public void AddUpgradePoints(float points)
+        {
+            UpgradePoints += points;
+        }
+
         private void HandleShot()
         {
             float threshhold = 0.1f;
@@ -50,23 +71,40 @@ namespace Assets.RootnShoot.Scripts.Root
             {
                 StopShot();
             }
-            currentShotPos += shotDirection * Time.deltaTime * shotSpeed;
+            currentShotPos += shotDirection * Time.deltaTime * upgradeManager.Speed;
             shotDirection *= 1 - fallOff;
             currentLine.SetPosition(currentLine.positionCount - 1, currentShotPos);
             followTarget.position = currentShotPos;
             //directionChange
-            if(Random.Range(0f,1f)<squiggleProbability* Time.deltaTime)
+            if(Random.Range(0f,1f)<upgradeManager.SpreadProb* Time.deltaTime)
             {
                 currentLine.positionCount++;
                 currentLine.SetPosition(currentLine.positionCount-1, currentShotPos);
-                shotDirection = shotDirection.Rotate(Random.Range(-squiggleAngle, squiggleAngle));
+                shotDirection = shotDirection.Rotate(Random.Range(-upgradeManager.SpreadAngle, upgradeManager.SpreadAngle));
             }
+        }
+
+        public void KillCurrentShot()
+        {
+            isShooting = false;
+            followTarget.position = currentNode.position;
+            currentLine.endColor = deadColor;
+            CheckIfDefeat();
         }
 
         private void StopShot()
         {
             isShooting = false;
             currentNode = currentNode.AddChild(currentShotPos, currentLine);
+            CheckIfDefeat();
+        }
+
+        private void CheckIfDefeat()
+        {
+            if(currentJuice<=0)
+            {
+                Debug.Log("Defeat");
+            }
         }
 
         public void ShootToTarget(Vector3 direction)
@@ -79,6 +117,15 @@ namespace Assets.RootnShoot.Scripts.Root
 
         private void Shoot(Vector2 direction)
         {
+            float juiceCost = CalculateJuiceCost(direction);
+            if(juiceCost>currentJuice)
+            {
+                //reduce Strength
+            }
+            currentJuice -= juiceCost;
+            juiceBar.material.SetFloat("JuiceAmount", currentJuice);
+            juiceBar.material.SetFloat("MaxJuice", maxJuice);
+            
             currentShotPos = currentNode.position;
             isShooting = true;
             shotDirection = direction;
@@ -95,6 +142,15 @@ namespace Assets.RootnShoot.Scripts.Root
                 circle.transform.position = currentNode.position;
                 currentNode.circle = circle;
             }
+        }
+
+        public float CalculateJuiceCost(Vector2 direction)
+        {
+            if (direction.magnitude > MaxShotStrength)
+            {
+                direction *= MaxShotStrength / direction.magnitude;
+            }
+            return (MinJuiceCost + direction.magnitude) * upgradeManager.JuiceMultiplier;
         }
 
         public void CollidedWith(Collider2D collision)
