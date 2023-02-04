@@ -20,25 +20,48 @@ namespace Assets.RootnShoot.Scripts.Root
         public int currentAllowedStage = 0;
 
         public Terrain currentTerrain;
-        public Tilemap layer1;
-        public Tilemap layer2;
-        public Tilemap layer3;
         void Start()
         {
             rootController = GetComponentInParent<RootController>();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.collider.GetType() == typeof(TilemapCollider2D))
+            if (collision.GetType() == typeof(TilemapCollider2D))
             {
-                
+                if (Enum.TryParse<Terrain>(collision.gameObject.name, out currentTerrain))
+                {
+                    if (currentAllowedStage < (int)currentTerrain)
+                    {
+                        //New Zone not unlocked
+                        rootController.CollidedWith(collision);
+                    }
+                }
             }
             else
             {
                 rootController.CollidedWith(collision);
             }
         }
+
+        //private void OnCollisionEnter2D(Collision2D collision)
+        //{
+        //    if (collision.collider.GetType() == typeof(TilemapCollider2D))
+        //    {
+        //        if(Enum.TryParse<Terrain>(collision.collider.gameObject.name, out currentTerrain))
+        //        {
+        //            if (currentAllowedStage < (int)currentTerrain)
+        //            {
+        //                //New Zone not unlocked
+        //                rootController.CollidedWith(collision);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        rootController.CollidedWith(collision);
+        //    }
+        //}
 
         // Update is called once per frame
         void Update()
@@ -49,7 +72,6 @@ namespace Assets.RootnShoot.Scripts.Root
         public bool CanMove(Vector3 position)
         {
             bool canMove = true;
-            CheckTerrain(position);
             if (currentAllowedStage < (int)currentTerrain)
                 canMove = false;
 
@@ -57,15 +79,6 @@ namespace Assets.RootnShoot.Scripts.Root
             return canMove;
         }
 
-        private void CheckTerrain(Vector3 position)
-        {
-            if (layer1.HasTile(layer1.WorldToCell(position)))
-                currentTerrain = Terrain.Layer1;
-            if (layer2.HasTile(layer2.WorldToCell(position)))
-                currentTerrain = Terrain.Layer2;
-            if (layer3.HasTile(layer3.WorldToCell(position)))
-                currentTerrain = Terrain.Layer3;
-        }
     }
 
 }

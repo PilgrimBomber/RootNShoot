@@ -97,7 +97,7 @@ namespace Assets.RootnShoot.Scripts.Root
             }
         }
 
-        public void CollidedWith(Collision2D collision)
+        public void CollidedWith(Collider2D collision)
         {
             collided = true;
         }

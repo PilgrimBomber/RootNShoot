@@ -244,7 +244,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1290502816}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 8
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -635,9 +635,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAllowedStage: 0
   currentTerrain: 0
-  layer1: {fileID: 0}
-  layer2: {fileID: 0}
-  layer3: {fileID: 0}
 --- !u!50 &1290502818
 Rigidbody2D:
   serializedVersion: 4
@@ -646,7 +643,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290502815}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -720,9 +717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circlePrefab: {fileID: 7007983504202134538, guid: 2cb6453f1182ec24a947fa2149ce4872, type: 3}
+  LinePrefab: {fileID: 7373941812403096634, guid: 2aa11ef3b23245a4e94a7b19fec0a56a, type: 3}
   shotSpeed: 5
   fallOff: 0.01
-  LinePrefab: {fileID: 7373941812403096634, guid: 2aa11ef3b23245a4e94a7b19fec0a56a, type: 3}
   rootThickness: 1
   squiggleProbability: 15
   squiggleAngle: 30
