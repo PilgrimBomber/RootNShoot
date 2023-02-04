@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2289487436478258227, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
       propertyPath: m_Name
-      value: JuiceSource
+      value: JuiceSource 1
       objectReference: {fileID: 0}
     - target: {fileID: 2289487436478258228, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -18,6 +18,10 @@ PrefabInstance:
     - target: {fileID: 2289487436478258228, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289487436478258229, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
+      propertyPath: JuiceAmount
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2289487436478258230, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
       propertyPath: m_Sprite

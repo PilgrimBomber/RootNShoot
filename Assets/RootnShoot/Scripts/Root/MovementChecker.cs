@@ -14,7 +14,9 @@ namespace Assets.RootnShoot.Scripts.Root
         {
             Layer1,
             Layer2,
-            Layer3
+            Layer3,
+            Layer4,
+            Layer5
         }
         public UpgradeManager upgradeManager;
 

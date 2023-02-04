@@ -32,8 +32,8 @@ namespace Assets.RootnShoot.Scripts.Root
         [SerializeField] private Transform followTarget;
         [SerializeField] private Color deadColor;
         //Juice
-        private float maxJuice=100;
-        private float currentJuice = 50;
+        private float maxJuice=200;
+        private float currentJuice = 100;
         [SerializeField] private float MinJuiceCost = 20;
         [SerializeField] private float MaxShotStrength;
         public SpriteRenderer juiceBar;
@@ -57,6 +57,7 @@ namespace Assets.RootnShoot.Scripts.Root
         public void AddJuice(float amount)
         {
             currentJuice += amount;
+            juiceBar.material.SetFloat("JuiceAmount", currentJuice);
         }
 
         public void AddUpgradePoints(float points)
@@ -150,7 +151,7 @@ namespace Assets.RootnShoot.Scripts.Root
             {
                 direction *= MaxShotStrength / direction.magnitude;
             }
-            return (MinJuiceCost + direction.magnitude) * upgradeManager.JuiceMultiplier;
+            return (MinJuiceCost + direction.magnitude) * 0.6f * upgradeManager.JuiceMultiplier;
         }
 
         public void CollidedWith(Collider2D collision)

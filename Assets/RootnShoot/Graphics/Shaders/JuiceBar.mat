@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 09935a6a4695d4fa9929249151ead877, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2ee35e4808e0e904295975935dabce01, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_6edff264b93246a3a3790b253952696c_Texture_1:
@@ -45,7 +45,7 @@ Material:
     - JuiceForShot: 0
     - MaxJuice: 100
     m_Colors:
-    - EmptyColor: {r: 0.1603774, g: 0.1402089, b: 0.04160734, a: 0.5019608}
-    - JuiceColor: {r: 0.9716981, g: 0.8024071, b: 0.004583492, a: 0}
+    - EmptyColor: {r: 0.18867922, g: 0.1332431, b: 0.0489498, a: 0.5019608}
+    - JuiceColor: {r: 1, g: 0.7137255, b: 0.2784314, a: 1}
     - PreviewColor: {r: 0.6415094, g: 0.1664293, b: 0.1664293, a: 0}
   m_BuildTextureStacks: []

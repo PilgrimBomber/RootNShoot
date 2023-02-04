@@ -52,6 +52,10 @@ PrefabInstance:
       value: 0.47568333
       objectReference: {fileID: 0}
     - target: {fileID: 2289487436478258229, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
+      propertyPath: JuiceAmount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289487436478258229, guid: e880046ff42ae1240b3af58af3dd745a, type: 3}
       propertyPath: ConsumptionLevelNeeded
       value: 1
       objectReference: {fileID: 0}

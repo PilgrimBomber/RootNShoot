@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeManager : MonoBehaviour
+public class UpgradeManager : SingletonMonoBehaviour<UpgradeManager>
 {
     public int hardlockLevel = 0;
     public int softlockLevel = 0;
     public int rootSpeedLevel = 0;
     public int rootStraightLevel = 0;
     public int juiceCostLevel = 0;
+    public int visionRangeLevel = 0;//
+
     public List<float> speedValues;
     public List<float> rootSpreadAngles;
     public List<float> rootSpreadProbs;
