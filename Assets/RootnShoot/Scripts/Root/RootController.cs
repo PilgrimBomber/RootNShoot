@@ -15,6 +15,15 @@ namespace Assets.RootnShoot.Scripts.Root
 
         [SerializeField] private GameObject circlePrefab;
         [SerializeField] private GameObject LinePrefab;
+
+        [Header("Audio")]
+        [SerializeField] private List<AudioClip> shotClips;
+        [SerializeField] private AudioClip juiceGain;
+        [SerializeField] private AudioClip upgradeGain;
+        [SerializeField] private AudioClip rootDeath;
+        private AudioSource audioSource;
+
+        [Header("Shooting")]
         //Shot
         public float shotSpeed;
         [Range(0.001f, 0.2f)] public float fallOff = 0.05f;
@@ -22,15 +31,16 @@ namespace Assets.RootnShoot.Scripts.Root
         private Vector2 shotDirection;
         private bool isShooting;
         private bool collided;
-        //line
-        
+                
         private LineRenderer currentLine;
         [SerializeField] private float rootThickness = 1;
-        [SerializeField] private float squiggleProbability;
-        [SerializeField] private float squiggleAngle = 30;
-        //camera
+        //[SerializeField] private float squiggleProbability;
+        //[SerializeField] private float squiggleAngle = 30;
+        [Header("Camera")]
+            //camera
         [SerializeField] private Transform followTarget;
         [SerializeField] private Color deadColor;
+        [Header("Juice")]
         //Juice
         private float maxJuice=200;
         private float currentJuice = 100;
@@ -45,6 +55,7 @@ namespace Assets.RootnShoot.Scripts.Root
             rootNode = new TreeNode(Vector3.zero, null);
             currentNode = rootNode;
             upgradeManager = GetComponent<UpgradeManager>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -58,11 +69,13 @@ namespace Assets.RootnShoot.Scripts.Root
         {
             currentJuice += amount;
             juiceBar.material.SetFloat("JuiceAmount", currentJuice);
+            audioSource.PlayOneShot(juiceGain);
         }
 
         public void AddUpgradePoints(float points)
         {
             UpgradePoints += points;
+            audioSource.PlayOneShot(upgradeGain);
         }
 
         private void HandleShot()
@@ -90,6 +103,7 @@ namespace Assets.RootnShoot.Scripts.Root
             isShooting = false;
             followTarget.position = currentNode.position;
             currentLine.endColor = deadColor;
+            audioSource.PlayOneShot(rootDeath);
             CheckIfDefeat();
         }
 
@@ -143,6 +157,8 @@ namespace Assets.RootnShoot.Scripts.Root
                 circle.transform.position = currentNode.position;
                 currentNode.circle = circle;
             }
+            audioSource.PlayOneShot(shotClips[Random.Range(0, shotClips.Count - 1)]);
+
         }
 
         public float CalculateJuiceCost(Vector2 direction)
