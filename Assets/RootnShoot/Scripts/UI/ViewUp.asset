@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc54ea7fe517704db4ee915b96ed6ba, type: 3}
+  m_Name: ViewUp
+  m_EditorClassIdentifier: 
+  icon: {fileID: -2696506250795634678, guid: e58105e0452ebbb47907ba616bdcd75b, type: 3}
+  title: View Ranger
+  description: Better then glasses!
+  cost: 7
+  purchased: 0
+  stage: 2
+  maxStage: 4
+  upgradeType: 0

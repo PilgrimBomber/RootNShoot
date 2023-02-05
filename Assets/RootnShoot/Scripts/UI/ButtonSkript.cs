@@ -5,34 +5,99 @@ using UnityEngine.UI;
 
 public class ButtonSkript : MonoBehaviour
 {
-    public List<Sprite> buttonSprites;
-    private Transform HoverChild;
-    private Image image;
+    public Upgrade myUpgrade;
+    public Image myIcon;
+    public Button buyButton;
+    public Button followMeButton;
+    public GameObject followMeQuestionmark;
+    public Text titleText;
+    public Text descriptionText;
+    public Text costText;
+    public Image inspectorIcon;
+    public ButtonHandler buttonHandler;
+    public GameObject buttonHandlerG;
+
+    public int costIncrease;
 
     public void Awake()
     {
-        HoverChild = transform.GetComponentInChildren<Transform>();
-        HoverChild.gameObject.SetActive(false);
-        image = GetComponent<Image>();
+        buttonHandler = buttonHandlerG.GetComponent<ButtonHandler>();
+        if (myUpgrade.purchased == true)
+        {
+            myIcon.color = new Color(42, 42, 42);
+        }
     }
 
-    public void OnMouseOver()
+    public void Clicked()
     {
-        HoverChild.gameObject.SetActive(true);
+        if (myUpgrade.purchased != true)
+        {
+            buyButton.gameObject.SetActive(true);
+            costText.text = myUpgrade.cost.ToString();
+        }
+        else
+        {
+            buyButton.gameObject.SetActive(false);
+            costText.text = "--";
+        }
+        titleText.text = myUpgrade.title;
+        descriptionText.text = myUpgrade.description;
+        inspectorIcon.sprite = myUpgrade.icon;
+        buttonHandler.currentButton = gameObject.GetComponent<Button>();
+
     }
 
-    public void OnMouseExit()
+
+    public int Upgrade(int total)
     {
-        HoverChild.gameObject.SetActive(false);
+        if (total >= myUpgrade.cost)
+        {
+            int oldCost = myUpgrade.cost;
+            switch (myUpgrade.upgradeType)
+            {
+                case 0:
+                    UpgradeManager.Instance.rootSpeedLevel++;
+                    myUpgrade.cost += costIncrease;
+                    break;
+                case 1:
+                    UpgradeManager.Instance.juiceCostLevel++;
+                    myUpgrade.cost += costIncrease;
+                    break;
+                case 2:
+                    UpgradeManager.Instance.rootStraightLevel++;
+                    myUpgrade.cost += costIncrease;
+                    break;
+                case 3:
+                    UpgradeManager.Instance.visionRangeLevel++;
+                    myUpgrade.cost += costIncrease;
+                    break;
+                case 4:
+                    UpgradeManager.Instance.hardlockLevel++;
+                    break;
+                case 5:
+                    UpgradeManager.Instance.softlockLevel++;
+                    break;
+            }
+            myUpgrade.stage++;
+            costText.text = myUpgrade.cost.ToString();
+            if (myUpgrade.stage >= myUpgrade.maxStage)
+                CompleteUpgrade();
+            return (oldCost);
+        }
+        else
+            return (0);
     }
 
-    public void OnMouseDown()
+    public void CompleteUpgrade()
     {
-        image.sprite = buttonSprites[1];
-    }
-
-    public void OnMouseUp()
-    {
-        image.sprite = buttonSprites[0];
+        myIcon.color = new Color32(42,42,42, 255);
+        if (followMeButton != null)
+        {
+            followMeButton.gameObject.SetActive(true);
+            followMeQuestionmark.SetActive(false);
+        }
+        myUpgrade.purchased = true;
+        buyButton.gameObject.SetActive(false);
+        costText.text = "--";
     }
 }
