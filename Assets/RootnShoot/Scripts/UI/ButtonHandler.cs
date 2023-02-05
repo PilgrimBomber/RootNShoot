@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 {
-    public int nutriScore;
     public Text nutriScoreText;
 
     public Button currentButton;
@@ -45,8 +44,8 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 
     public new void Awake()
     {
-        nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
-        nutriScoreText.text = nutriScore.ToString();
+        UpgradeManager.Instance.UpgradePoints= (int)UpgradeManager.Instance.UpgradePoints;
+        nutriScoreText.text = UpgradeManager.Instance.UpgradePoints.ToString();
         move = false;
         slider.onValueChanged.AddListener(delegate { audioMixer.SetFloat("Audio", -40 + (slider.value / slider.maxValue)*60); });
         base.Awake();
@@ -54,9 +53,9 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 
     public void BuyClick()
     {
-        int nutriCost = currentButton.GetComponent<ButtonSkript>().Upgrade(nutriScore);
-        nutriScore -= nutriCost;
-        nutriScoreText.text = nutriScore.ToString();
+        int nutriCost = currentButton.GetComponent<ButtonSkript>().Upgrade((int)UpgradeManager.Instance.UpgradePoints);
+        UpgradeManager.Instance.UpgradePoints-= nutriCost;
+        nutriScoreText.text = UpgradeManager.Instance.UpgradePoints.ToString();
     }
 
     
@@ -81,7 +80,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
             case 2:
                 pauseMenu.SetActive(true);
                 X.SetActive(true);
-                nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
+                
                 gameState = 1;
                 break;
 
@@ -112,7 +111,6 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
         pauseMenu.SetActive(false);
         gameState = 2;
         GameManager.Instance.CloseMenu();
-        UpgradeManager.Instance.UpgradePoints = nutriScore;
     }
 
     public void Evolve()
