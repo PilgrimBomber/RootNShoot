@@ -107,6 +107,11 @@ namespace Assets.RootnShoot.Scripts.Root
             CheckIfDefeat();
         }
 
+        public void Freeze()
+        {
+            isShooting = false;
+        }
+
         private void StopShot()
         {
             isShooting = false;
@@ -157,7 +162,8 @@ namespace Assets.RootnShoot.Scripts.Root
                 circle.transform.position = currentNode.position;
                 currentNode.circle = circle;
             }
-            audioSource.PlayOneShot(shotClips[Random.Range(0, shotClips.Count - 1)]);
+            if(shotClips.Count>0)
+                audioSource.PlayOneShot(shotClips[Random.Range(0, shotClips.Count - 1)]);
 
         }
 
