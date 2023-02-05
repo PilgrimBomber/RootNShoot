@@ -13,6 +13,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public Transform ResetPosition;
     public CinemachineVirtualCamera virtualCamera;
     public LevelIntro levelIntro;
+
+    private bool levelActive = false;
     public void Start()
     {
         LevelIntro();
@@ -32,15 +34,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         
 
         playerInput.SwitchCurrentActionMap("Roots");
+        levelActive = true;
     }
 
     public void EndLevel()
     {
-        SceneManager.UnloadScene("Level1");
+        if (!levelActive) return;
+        SceneManager.UnloadSceneAsync("Level1");
         //Jump To StartPos
         virtualCamera.Follow = ResetPosition;
         //Open Upgrade Menu
-        //ButtonHandler.Instance.Evolve();
+        ButtonHandler.Instance.Evolve();
+        levelActive = false;
     }
 
     public void Victory()
