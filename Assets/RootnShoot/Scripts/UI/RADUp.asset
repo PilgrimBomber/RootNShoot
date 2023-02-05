@@ -16,7 +16,7 @@ MonoBehaviour:
   title: RadAway
   description: Protcts for those deadly rays. Just dig right through them.
   cost: 10
-  purchased: 1
-  stage: 1
+  purchased: 0
+  stage: 0
   maxStage: 1
   upgradeType: 0

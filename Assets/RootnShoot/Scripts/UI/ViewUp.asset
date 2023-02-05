@@ -15,8 +15,8 @@ MonoBehaviour:
   icon: {fileID: -2696506250795634678, guid: e58105e0452ebbb47907ba616bdcd75b, type: 3}
   title: View Ranger
   description: Better then glasses!
-  cost: 7
+  cost: 3
   purchased: 0
-  stage: 2
+  stage: 0
   maxStage: 4
   upgradeType: 0

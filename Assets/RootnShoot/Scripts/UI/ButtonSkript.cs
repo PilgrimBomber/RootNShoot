@@ -17,6 +17,9 @@ public class ButtonSkript : MonoBehaviour
     public ButtonHandler buttonHandler;
     public GameObject buttonHandlerG;
 
+    public Image iconGlow;
+    public List<Sprite> glowList;
+
     public int costIncrease;
 
     public void Awake()
@@ -26,6 +29,8 @@ public class ButtonSkript : MonoBehaviour
         {
             myIcon.color = new Color(42, 42, 42);
         }
+        if(myUpgrade.upgradeType < 4)
+            iconGlow.sprite = glowList[myUpgrade.stage];
     }
 
     public void Clicked()
@@ -79,6 +84,8 @@ public class ButtonSkript : MonoBehaviour
                     break;
             }
             myUpgrade.stage++;
+            if (myUpgrade.upgradeType < 4)
+                iconGlow.sprite = glowList[myUpgrade.stage];
             costText.text = myUpgrade.cost.ToString();
             if (myUpgrade.stage >= myUpgrade.maxStage)
                 CompleteUpgrade();
