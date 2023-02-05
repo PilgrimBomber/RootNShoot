@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
@@ -37,6 +38,8 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     public float scrollSpeed;
     bool move;
     bool fade;
+    public Slider slider;
+    public AudioMixer audioMixer;
 
     public int gameState;
 
@@ -45,6 +48,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
         nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
         nutriScoreText.text = nutriScore.ToString();
         move = false;
+        slider.onValueChanged.AddListener(delegate { audioMixer.SetFloat("Audio", slider.value / slider.maxValue); });
         base.Awake();
     }
 
@@ -150,6 +154,10 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     {
         Application.Quit();
     }
+
+
+
+
 
 
     public void Update()
