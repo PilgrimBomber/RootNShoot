@@ -17,7 +17,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private bool levelActive = false;
     public void Start()
     {
-        
+        LevelIntro();
     }
 
     public void LevelIntro()
