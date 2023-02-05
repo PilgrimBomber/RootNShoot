@@ -48,7 +48,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
         nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
         nutriScoreText.text = nutriScore.ToString();
         move = false;
-        slider.onValueChanged.AddListener(delegate { audioMixer.SetFloat("Audio", slider.value / slider.maxValue); });
+        slider.onValueChanged.AddListener(delegate { audioMixer.SetFloat("Audio", -40 + (slider.value / slider.maxValue)*60); });
         base.Awake();
     }
 
@@ -133,6 +133,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     public void StartGame()
     {
         GameManager.Instance.LevelIntro();
+        upgradeMenu.SetActive(false);
         gameState = 2;
     }
 

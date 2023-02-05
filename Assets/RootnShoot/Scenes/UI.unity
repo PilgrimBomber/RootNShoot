@@ -225,7 +225,7 @@ MonoBehaviour:
   buyButton: {fileID: 454337541}
   X: {fileID: 1372875072}
   continueButton: {fileID: 1031112987}
-  fadeTime: 0.005
+  fadeTime: 0.002
   maxVolume: 0.6
   menuRest: {fileID: 1012592195}
   menuSolo: {fileID: 1134515708}
@@ -5604,7 +5604,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8132,7 +8132,7 @@ AudioSource:
   m_GameObject: {fileID: 1939274341}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f4883aca871ed0842bd29d4ff10a159d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5e25448954464634685eff8dae9e9e56, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
