@@ -22,6 +22,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     public Sprite questionMark;
     public Button buyButton;
     public GameObject X;
+    public GameObject continueButton;
 
     public float fadeTime;
     public float maxVolume;
@@ -87,6 +88,8 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     {
         if(gameState == 1)
         {
+            X.SetActive(true);
+            continueButton.SetActive(false);
             upgradeMenu.SetActive(true);
             pauseMenu.SetActive(false);
             currentButton = null;
@@ -100,6 +103,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 
     public void ClosePauseMenu()
     {
+        continueButton.SetActive(false);
         X.SetActive(false);
         pauseMenu.SetActive(false);
         gameState = 2;
@@ -112,6 +116,14 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
         gameState = 0;
         upgradeMenu.SetActive(true);
         pauseMenu.SetActive(false);
+        X.SetActive(false);
+        continueButton.SetActive(true);
+        currentButton = null;
+        titleText.text = "";
+        descriptionText.text = "";
+        costText.text = "--";
+        inspectorIcon.sprite = questionMark;
+        buyButton.gameObject.SetActive(false);
     }
 
     public void StartGame()
