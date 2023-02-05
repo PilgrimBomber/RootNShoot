@@ -17,7 +17,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private bool levelActive = false;
     public void Start()
     {
-        LevelIntro();
+        
     }
 
     public void LevelIntro()
@@ -50,7 +50,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void Victory()
     {
-
+        virtualCamera.Follow = ResetPosition;
+        playerInput.SwitchCurrentActionMap("Menu"); 
+        ButtonHandler.instance.FinishGame();
     }
 
     public void EnterPauseMenu()
