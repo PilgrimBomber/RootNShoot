@@ -59,6 +59,7 @@ namespace Assets.RootnShoot.Scripts.Root
         {
             upgradeManager = GetComponent<UpgradeManager>();
             audioSource = GetComponent<AudioSource>();
+            StartLevel();
         }
 
         public void EndLevel()
@@ -74,6 +75,8 @@ namespace Assets.RootnShoot.Scripts.Root
                 allLines.RemoveAt(0);
             }
             rootNode = null;
+            followTarget.gameObject.SetActive(false);
+            GameManager.Instance.EndLevel();
         }
 
         public void StartLevel()
@@ -84,13 +87,21 @@ namespace Assets.RootnShoot.Scripts.Root
             //pos
             rootNode = new TreeNode(Vector3.zero, null);
             currentNode = rootNode;
+            followTarget.gameObject.SetActive(true);
+            followTarget.position = startPos.position;
             //cAMERA
             virtualCamera.Follow = followTarget;
-            virtualCamera.m_Lens.OrthographicSize = 8;
+            virtualCamera.m_Lens.OrthographicSize = upgradeManager.OrthoSize;
+            //ScaleJuiceBar
+            Vector3 relativeBigPos = new Vector3(14, .21f, 10);
+            Vector3 bigScale = new Vector3(3.54f, 4.09f, 1);
+            juiceBar.transform.parent.localPosition = (upgradeManager.OrthoSize / 8f) * relativeBigPos * (16f/18f); 
+            juiceBar.transform.parent.localScale = (upgradeManager.OrthoSize / 8f) * bigScale; 
             //lightSize
-            followTarget.GetComponent<Light2D>().pointLightOuterRadius = 7.5f;
+            followTarget.GetComponent<Light2D>().pointLightOuterRadius = upgradeManager.LightRange;
 
             currentJuice = maxJuice / 2;
+            juiceBar.material.SetFloat("JuiceAmount", currentJuice);
         }
 
         private void Update()
@@ -158,7 +169,7 @@ namespace Assets.RootnShoot.Scripts.Root
         {
             if(currentJuice<=0)
             {
-                Debug.Log("Defeat");
+                EndLevel();
             }
         }
 

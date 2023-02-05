@@ -15,6 +15,8 @@ public class UpgradeManager : SingletonMonoBehaviour<UpgradeManager>
     public List<float> rootSpreadAngles;
     public List<float> rootSpreadProbs;
     public List<float> juiceCostMultiplier;
+    public List<float> orthoSizes;
+    public List<float> lightRanges;
     public float Speed 
     {
         get 
@@ -44,5 +46,20 @@ public class UpgradeManager : SingletonMonoBehaviour<UpgradeManager>
         }
     }
 
+    public float OrthoSize
+    {
+        get
+        {
+            return orthoSizes[visionRangeLevel];
+        }
+    }
+
+    public float LightRange
+    {
+        get
+        {
+            return lightRanges[visionRangeLevel];
+        }
+    }
 
 }

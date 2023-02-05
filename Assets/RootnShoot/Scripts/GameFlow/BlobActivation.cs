@@ -26,7 +26,7 @@ public class BlobActivation : MonoBehaviour
 
         }
 
-        Debug.Log("Glowing finished");
+        GameManager.Instance.Victory();
     }
 
     void Start()
