@@ -15,8 +15,8 @@ MonoBehaviour:
   icon: {fileID: 3876512272233767631, guid: e58105e0452ebbb47907ba616bdcd75b, type: 3}
   title: Energy Consumption.
   description: Less Energy per root 'n' shoot. Saves the planet tho.
-  cost: 11
-  purchased: 1
-  stage: 4
+  cost: 3
+  purchased: 0
+  stage: 0
   maxStage: 4
   upgradeType: 0

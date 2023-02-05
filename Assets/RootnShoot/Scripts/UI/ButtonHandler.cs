@@ -19,12 +19,18 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     public Image inspectorIcon;
     public Sprite questionMark;
     public Button buyButton;
+    public GameObject X;
+
+    public float fadeTime;
+    public float maxVolume;
 
     public int gameState;
 
-    public void Awake()
+    public new void Awake()
     {
+        nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
         nutriScoreText.text = nutriScore.ToString();
+        base.Awake();
     }
 
     public void BuyClick()
@@ -40,6 +46,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
         switch (gameState)
         {
             case 0:
+                StartGame();
                 break;
             case 1:
                 if (pauseMenu.activeSelf)
@@ -54,6 +61,8 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
                 break;
             case 2:
                 pauseMenu.SetActive(true);
+                X.SetActive(true);
+                nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
                 gameState = 1;
                 break;
 
@@ -62,21 +71,43 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 
     public void OpenUpgradeMenu()
     {
-        upgradeMenu.SetActive(true);
-        pauseMenu.SetActive(false);
-        currentButton = null;
-        titleText.text = "";
-        descriptionText.text = "";
-        costText.text = "--";
-        inspectorIcon.sprite = questionMark;
-        buyButton.gameObject.SetActive(false);
+        if(gameState == 1)
+        {
+            upgradeMenu.SetActive(true);
+            pauseMenu.SetActive(false);
+            currentButton = null;
+            titleText.text = "";
+            descriptionText.text = "";
+            costText.text = "--";
+            inspectorIcon.sprite = questionMark;
+            buyButton.gameObject.SetActive(false);
+        }
     }
 
     public void ClosePauseMenu()
     {
+        X.SetActive(false);
         pauseMenu.SetActive(false);
         gameState = 2;
         GameManager.Instance.CloseMenu();
+        UpgradeManager.Instance.UpgradePoints = nutriScore;
+    }
+
+    public void Evolve()
+    {
+        gameState = 0;
+        upgradeMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+
+    }
+
+    public void StartNewGame()
+    {
+
     }
 
 }
