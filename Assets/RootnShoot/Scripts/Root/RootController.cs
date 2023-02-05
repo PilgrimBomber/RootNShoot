@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 namespace Assets.RootnShoot.Scripts.Root
@@ -31,7 +32,9 @@ namespace Assets.RootnShoot.Scripts.Root
         private Vector2 shotDirection;
         private bool isShooting;
         private bool collided;
-                
+
+        private List<LineRenderer> allLines;
+        private List<GameObject> allCircles;
         private LineRenderer currentLine;
         [SerializeField] private float rootThickness = 1;
         //[SerializeField] private float squiggleProbability;
@@ -39,7 +42,9 @@ namespace Assets.RootnShoot.Scripts.Root
         [Header("Camera")]
             //camera
         [SerializeField] private Transform followTarget;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private Color deadColor;
+        [SerializeField] private Transform startPos;
         [Header("Juice")]
         //Juice
         private float maxJuice=200;
@@ -48,20 +53,44 @@ namespace Assets.RootnShoot.Scripts.Root
         [SerializeField] private float MaxShotStrength;
         public SpriteRenderer juiceBar;
 
-        public float UpgradePoints;
+        
         private UpgradeManager upgradeManager;
         void Start()
         {
-            rootNode = new TreeNode(Vector3.zero, null);
-            currentNode = rootNode;
             upgradeManager = GetComponent<UpgradeManager>();
             audioSource = GetComponent<AudioSource>();
         }
 
+        public void EndLevel()
+        {
+            while (allCircles.Count > 0)
+            {
+                Destroy(allCircles[0]);
+                allCircles.RemoveAt(0);
+            }
+            while (allLines.Count > 0)
+            {
+                Destroy(allLines[0].gameObject);
+                allLines.RemoveAt(0);
+            }
+            rootNode = null;
+        }
+
         public void StartLevel()
         {
+            allCircles = new List<GameObject>();
+            allLines = new List<LineRenderer>();
+            
             //pos
+            rootNode = new TreeNode(Vector3.zero, null);
+            currentNode = rootNode;
             //cAMERA
+            virtualCamera.Follow = followTarget;
+            virtualCamera.m_Lens.OrthographicSize = 8;
+            //lightSize
+            followTarget.GetComponent<Light2D>().pointLightOuterRadius = 7.5f;
+
+            currentJuice = maxJuice / 2;
         }
 
         private void Update()
@@ -80,7 +109,7 @@ namespace Assets.RootnShoot.Scripts.Root
 
         public void AddUpgradePoints(float points)
         {
-            UpgradePoints += points;
+            upgradeManager.UpgradePoints += points;
             audioSource.PlayOneShot(upgradeGain);
         }
 
@@ -156,6 +185,7 @@ namespace Assets.RootnShoot.Scripts.Root
             isShooting = true;
             shotDirection = direction;
             currentLine = Instantiate(LinePrefab, this.transform).GetComponent<LineRenderer>();
+            allLines.Add(currentLine);
             currentLine.SetPositions(new Vector3[]{ currentShotPos,currentShotPos});
             
             currentLine.startWidth = rootThickness;
@@ -165,6 +195,7 @@ namespace Assets.RootnShoot.Scripts.Root
             if (currentNode.children.Count == 0)
             {
                 GameObject circle = Instantiate(circlePrefab, currentLine.transform);
+                allCircles.Add(circle);
                 circle.transform.position = currentNode.position;
                 currentNode.circle = circle;
             }

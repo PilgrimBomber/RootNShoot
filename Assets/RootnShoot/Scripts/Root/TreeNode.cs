@@ -79,5 +79,7 @@ namespace Assets.RootnShoot.Scripts.Root
             this.parent = parent;
             children = new List<TreeNode>();
         }
+
+        
     }
 }

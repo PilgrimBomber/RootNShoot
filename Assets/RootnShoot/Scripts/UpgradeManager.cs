@@ -10,7 +10,7 @@ public class UpgradeManager : SingletonMonoBehaviour<UpgradeManager>
     public int rootStraightLevel = 0;
     public int juiceCostLevel = 0;
     public int visionRangeLevel = 0;//
-
+    public float UpgradePoints;
     public List<float> speedValues;
     public List<float> rootSpreadAngles;
     public List<float> rootSpreadProbs;

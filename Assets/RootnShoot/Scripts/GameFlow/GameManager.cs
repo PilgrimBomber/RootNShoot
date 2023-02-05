@@ -1,3 +1,4 @@
+using Assets.RootnShoot.Scripts.Root;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,11 @@ using UnityEngine.InputSystem;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public PlayerInput Input;
-
+    public RootController rootController;
 
     public void StartLevel()
     {
-
+        rootController.StartLevel();
     }
 
     public void EndLevel()
