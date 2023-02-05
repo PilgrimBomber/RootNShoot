@@ -58,6 +58,12 @@ namespace Assets.RootnShoot.Scripts.Root
             audioSource = GetComponent<AudioSource>();
         }
 
+        public void StartLevel()
+        {
+            //pos
+            //cAMERA
+        }
+
         private void Update()
         {
             if(isShooting) 

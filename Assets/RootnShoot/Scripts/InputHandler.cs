@@ -73,4 +73,10 @@ public class InputHandler : MonoBehaviour
         rootController.Navigate(RootController.Direction.Right);
     }
 
+    public void OnPause()
+    {
+        GameManager.Instance.EnterPauseMenu();
+
+    }
+
 }
