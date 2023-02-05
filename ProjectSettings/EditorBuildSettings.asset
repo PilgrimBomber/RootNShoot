@@ -8,5 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/RootnShoot/Scenes/MainScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/RootnShoot/Scenes/Level1.unity
+    guid: bdf95bec5be77844e8a2242e5b1f61bb
+  - enabled: 1
+    path: Assets/RootnShoot/Scenes/UI.unity
+    guid: 53a623cd27b7f964e91227479174da46
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2d6993b6b84193845854f1355a8e6db1, type: 2}

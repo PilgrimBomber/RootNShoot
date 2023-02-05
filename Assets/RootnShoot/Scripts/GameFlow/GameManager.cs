@@ -17,7 +17,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private bool levelActive = false;
     public void Start()
     {
-
+        SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
     }
 
     public void LevelIntro()

@@ -133,7 +133,7 @@ namespace Assets.RootnShoot.Scripts.Root
                 StopShot();
             }
             currentShotPos += shotDirection * Time.deltaTime * upgradeManager.Speed;
-            shotDirection *= 1 - fallOff;
+            shotDirection *= (1 - fallOff* (Time.deltaTime / 0.017f));
             currentLine.SetPosition(currentLine.positionCount - 1, currentShotPos);
             followTarget.position = currentShotPos;
             //directionChange
@@ -222,7 +222,7 @@ namespace Assets.RootnShoot.Scripts.Root
             {
                 direction *= MaxShotStrength / direction.magnitude;
             }
-            return (MinJuiceCost + direction.magnitude) * 0.6f * upgradeManager.JuiceMultiplier;
+            return (MinJuiceCost + direction.magnitude) * 1f * upgradeManager.JuiceMultiplier;
         }
 
         public void CollidedWith(Collider2D collision)
