@@ -44,8 +44,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
             case 1:
                 if (pauseMenu.activeSelf)
                 {
-                    pauseMenu.SetActive(false);
-                    gameState = 2;
+                    ClosePauseMenu();
                 }
                 else if(upgradeMenu.activeSelf)
                 {
@@ -71,6 +70,13 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
         costText.text = "--";
         inspectorIcon.sprite = questionMark;
         buyButton.gameObject.SetActive(false);
+    }
+
+    public void ClosePauseMenu()
+    {
+        pauseMenu.SetActive(false);
+        gameState = 2;
+        GameManager.Instance.CloseMenu();
     }
 
 }
