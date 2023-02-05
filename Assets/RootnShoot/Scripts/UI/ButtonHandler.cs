@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonHandler : MonoBehaviour
+public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 {
     public int nutriScore;
     public Text nutriScoreText;
