@@ -28,16 +28,12 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void OnShoot(InputValue value)
-    {
-        //Vector3 WorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        //rootController.ShootToTarget(WorldPos);
-    }
 
     public void OnCharge(InputValue value)
     {
         if(value.isPressed)
         {
+            Debug.Log("Pressed");
             ChargeStartPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             IsCharging = true;
             chargeLine.gameObject.SetActive(true);
@@ -46,6 +42,7 @@ public class InputHandler : MonoBehaviour
         }
         else
         {
+            Debug.Log("Released");
             IsCharging = false;
             rootController.juiceBar.material.SetFloat("JuiceForShot",0);
             Vector3 ReleasePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());

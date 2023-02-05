@@ -37,7 +37,8 @@ public class ButtonSkript : MonoBehaviour
     {
         if (myUpgrade.purchased != true)
         {
-            buyButton.gameObject.SetActive(true);
+            if(buttonHandler.gameState == 1)
+                buyButton.gameObject.SetActive(true);
             costText.text = myUpgrade.cost.ToString();
         }
         else
@@ -49,7 +50,6 @@ public class ButtonSkript : MonoBehaviour
         descriptionText.text = myUpgrade.description;
         inspectorIcon.sprite = myUpgrade.icon;
         buttonHandler.currentButton = gameObject.GetComponent<Button>();
-
     }
 
 

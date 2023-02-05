@@ -59,7 +59,8 @@ namespace Assets.RootnShoot.Scripts.Root
         {
             upgradeManager = GetComponent<UpgradeManager>();
             audioSource = GetComponent<AudioSource>();
-            StartLevel();
+            allLines = new List<LineRenderer>();
+            allCircles = new List<GameObject>();
         }
 
         public void EndLevel()
@@ -85,7 +86,7 @@ namespace Assets.RootnShoot.Scripts.Root
             allLines = new List<LineRenderer>();
             
             //pos
-            rootNode = new TreeNode(Vector3.zero, null);
+            rootNode = new TreeNode(startPos.position, null);
             currentNode = rootNode;
             followTarget.gameObject.SetActive(true);
             followTarget.position = startPos.position;
