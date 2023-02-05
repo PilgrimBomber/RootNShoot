@@ -12,6 +12,8 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 
     public GameObject upgradeMenu;
     public GameObject pauseMenu;
+    public GameObject startMenu;
+    public GameObject endScreen;
 
     public Text titleText;
     public Text descriptionText;
@@ -24,12 +26,24 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
     public float fadeTime;
     public float maxVolume;
 
+    public AudioSource menuRest;
+    public AudioSource menuSolo;
+    public AudioSource soundTrack;
+
+    public GameObject startIcon;
+    public GameObject seedIcon;
+    public GameObject titleIcon;
+    public float scrollSpeed;
+    bool move;
+    bool fade;
+
     public int gameState;
 
     public new void Awake()
     {
         nutriScore = (int)UpgradeManager.Instance.UpgradePoints;
         nutriScoreText.text = nutriScore.ToString();
+        move = false;
         base.Awake();
     }
 
@@ -102,12 +116,61 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
 
     public void StartGame()
     {
-
+        GameManager.Instance.LevelIntro();
+        gameState = 2;
     }
 
     public void StartNewGame()
     {
+        seedIcon.SetActive(false);
+        fade = true;
+        GameManager.Instance.LevelIntro();
+        move = true;
+        gameState = 2;
+    }
 
+    public void FinishGame()
+    {
+        endScreen.SetActive(true);
+    }
+
+    public void TerminateGame()
+    {
+        Application.Quit();
+    }
+
+
+    public void Update()
+    {
+        if(move)
+        {
+            if (titleIcon.transform.position.y <= 1000)
+            {
+                titleIcon.transform.position = new Vector3(titleIcon.transform.position.x, titleIcon.transform.position.y + scrollSpeed, titleIcon.transform.position.z);
+                startIcon.transform.position = new Vector3(startIcon.transform.position.x, startIcon.transform.position.y + scrollSpeed, startIcon.transform.position.z);
+            }
+            if(titleIcon.transform.position.y >= 1000)
+            {
+                move = false;
+                startMenu.SetActive(false);
+            }
+        }
+        if(fade)
+        {
+            if(soundTrack.volume <= maxVolume)
+                soundTrack.volume += fadeTime;
+            if(menuSolo.volume >= 0)
+                menuSolo.volume -= fadeTime;
+            if (menuRest.volume >= 0)
+                menuRest.volume -= fadeTime;
+
+            if (soundTrack.volume >= maxVolume && menuSolo.volume <= 0 && menuRest.volume <= 0)
+            {
+                fade = false;
+                menuRest.Stop();
+                menuSolo.Stop();
+            }
+        }
     }
 
 }

@@ -19,4 +19,4 @@ MonoBehaviour:
   purchased: 0
   stage: 0
   maxStage: 1
-  upgradeType: 0
+  upgradeType: 5
