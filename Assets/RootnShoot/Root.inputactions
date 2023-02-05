@@ -2,17 +2,9 @@
     "name": "Root",
     "maps": [
         {
-            "name": "Root",
+            "name": "Roots",
             "id": "31ad95c6-c741-4ab3-a7fe-41c5cef5a240",
             "actions": [
-                {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "e68f247f-a167-42ae-a1b4-eb41d61c7271",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
                 {
                     "name": "NavUp",
                     "type": "Button",
@@ -47,7 +39,7 @@
                 },
                 {
                     "name": "Charge",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "7f861867-5368-4d26-a9bc-276f2cc244a7",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -63,17 +55,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "d14e0402-19df-4f92-a7fc-61b7aa632311",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "c2de1f53-bf2f-4b34-8afb-dd0fbd7215d8",
@@ -145,29 +126,8 @@
         {
             "name": "Menu",
             "id": "801974a5-9cae-4148-b485-37d36b5f9f73",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "c99ed7f1-0622-49ea-805a-b72b3b8f0347",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold"
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "cc99a3fe-9aff-496e-abba-49bf5cfbc7a4",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

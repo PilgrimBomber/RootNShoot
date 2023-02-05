@@ -8,21 +8,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    public PlayerInput Input;
+    public PlayerInput playerInput;
     public RootController rootController;
     public Transform ResetPosition;
     public CinemachineVirtualCamera virtualCamera;
+    public LevelIntro levelIntro;
+    public void Start()
+    {
+        LevelIntro();
+    }
 
     public void LevelIntro()
     {
         SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Additive);
+        virtualCamera.Follow = levelIntro.Seed.transform;
+        levelIntro.BeginIntro();
     }
 
     public void StartLevel()
     {
         
         rootController.StartLevel();
-        Input.SwitchCurrentActionMap("Root");
+        
+
+        playerInput.SwitchCurrentActionMap("Roots");
     }
 
     public void EndLevel()
@@ -41,25 +50,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void EnterPauseMenu()
     {
-        Input.SwitchCurrentActionMap("Menu");
+        playerInput.SwitchCurrentActionMap("Menu");
         ButtonHandler.Instance.EscPress();
     }
 
     public void CloseMenu()
     {
-        Input.SwitchCurrentActionMap("Root");
+        playerInput.SwitchCurrentActionMap("Roots");
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
