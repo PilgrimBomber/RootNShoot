@@ -96,6 +96,7 @@ public class ButtonHandler : SingletonMonoBehaviour<ButtonHandler>
             upgradeMenu.SetActive(true);
             pauseMenu.SetActive(false);
             currentButton = null;
+            nutriScoreText.text = UpgradeManager.Instance.UpgradePoints.ToString();
             titleText.text = "";
             descriptionText.text = "";
             costText.text = "--";
